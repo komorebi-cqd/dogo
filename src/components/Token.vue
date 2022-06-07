@@ -131,24 +131,24 @@ onMounted(() => {
     color: #141414;
     .chart-l {
         background: url("../assets/data2.png") no-repeat;
-        background-position: bottom 0.38rem left 0.2rem;
+        background-position: bottom 0.38rem left 0.8rem;
         background-color: #ffffff;
-        background-size: 88%;
+        background-size: 68%;
     }
     .chart-r {
         background: url("../assets/data.png") no-repeat;
-        background-position: bottom 0.4rem left 0.3rem;
+        background-position: bottom 0.4rem left 0.8rem;
         background-color: #ffffff;
-        background-size: 88%;
+        background-size: 66%;
     }
 }
 
-.entoken{
-    .chart-l{
-        background-image: url("../assets/en-data.png");
-    }
-    .chart-r{
+.entoken {
+    .chart-l {
         background-image: url("../assets/en-data2.png");
+    }
+    .chart-r {
+        background-image: url("../assets/en-data.png");
     }
 }
 
@@ -182,6 +182,19 @@ onMounted(() => {
     }
     .token-chart {
         justify-content: space-evenly;
+        .chart-l {
+            background-position: bottom 0.28rem left 0.4rem;
+            background-size: 90%;
+        }
+        .chart-r {
+            background-position: bottom 0.3rem left 0.3rem;
+            background-size: 80%;
+        }
+    }
+    .entoken{
+        .chart-l {
+            background-size: 68%;
+        }
     }
     .chart {
         width: 3.5rem;

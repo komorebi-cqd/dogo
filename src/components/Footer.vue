@@ -3,11 +3,10 @@
         <img class="footer-logo" :src="logo" alt="logo" />
         <div class="footer-list">
             <span>Doge Adventure</span>
-            <a href=""><img :src="meta" alt="meta" /></a>
-            <a href=""><img :src="tg" alt="telegram" /></a>
-            <a href=""><img :src="twitter" alt="twitter" /></a>
-            <a href=""><img :src="discord" alt="discord" /></a>
-            <a href=""><img :src="facebook" alt="facebook" /></a>
+            <a href="https://medium.com/@official_25435" target="_blank"><img :src="meta" alt="meta" /></a>
+            <a href="https://t.me/DogeAdventure" target="_blank"><img :src="tg" alt="telegram" /></a>
+            <a href="https://twitter.com/DogeAdventure_" target="_blank"><img :src="twitter" alt="twitter" /></a>
+            <a href="https://discord.gg/ztnHsFfyXe" target="_blank"><img :src="discord" alt="discord" /></a>
         </div>
 
         
@@ -26,6 +25,7 @@ import meta from "../assets/mate.png";
 
 <style lang="scss" scoped>
 .footer {
+    overflow: hidden;
     width: 12rem;
     margin: 1rem auto 1.82rem;
     display: flex;

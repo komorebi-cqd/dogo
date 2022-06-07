@@ -1,19 +1,25 @@
 <script setup>
 import Head from "./components/Head.vue";
-import About from "./components/About.vue";
-import Footer from "./components/Footer.vue";
-import MintTime from "./components/MintTime.vue";
-import DogeType from "./components/DogeType.vue";
-import Earn from "./components/Earn.vue";
-import DogeProp from "./components/DogeProp.vue";
-import Token from "./components/Token.vue";
+import { onMounted, computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
 
-
+const account = computed(() => {
+    return store.state.account;
+});
+onMounted(() => {
+    store.dispatch("getTotalSupply");
+    if (account.value) {
+        store.dispatch("connect");
+    }
+});
 </script>
 
 <template>
-    <Head />
-    <router-view></router-view>
+    <div>
+        <Head />
+        <router-view></router-view>
+    </div>
 </template>
 
 <style lang="scss">
@@ -39,6 +45,31 @@ ul {
     padding: 0;
     list-style: none;
     margin: 0;
+}
+.swiper {
+    .swiper-button-prev {
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 50%;
+        background: #000;
+        z-index: 666;
+        &::after{
+            color: #fff;
+            font-size: 0.25rem;
+            font-weight: bold;
+        }
+    }
+    .swiper-button-next {
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 50%;
+        background: #000;
+        &::after{
+            color: #fff;
+            font-size: 0.25rem;
+            font-weight: bold;
+        }
+    }
 }
 </style>
 

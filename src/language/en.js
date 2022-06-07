@@ -7,7 +7,7 @@ const en = {
         nav3: "Prop",
         nav4: "Earn",
         nav5: "Token",
-        nav6: "Contact",
+        nav8: "Contact",
         wallet: 'Wallet',
         tip:"Stay tuned",
         myInvite: 'my invite',
@@ -19,13 +19,20 @@ const en = {
         exchange: 'exchange shield',
         consumeDt: 'consume dt',
         buySuperShield: 'buy super shield',
-        coin: 'coin NFT'
-
+        coin: 'coin NFT',
+        nav6: "WhitePaper",
+        nav7: "Contact",
+        tip:"Stay tuned",
     },
     about: {
         title: "About",
         aboutOne: "Doge Adventure is an original independent chain game incubated by X Protocol and supported by the community. The game combines Doge meme elements and the concept of NFT random fusion. Users earn profits and collect precious NFT collectibles by casting fusion, researching strategies, exploring, fighting",
         aboutTwo: "Doge Adventure plans to upgrade in 8-12 months to become a game platform that is compatible with third-party NFT access and provides 3D visualization effects"
+    },
+    dogeTime:{
+        price: "Price:",
+        mint: "Minted/Total:",
+        blindBox: "Open Blind Box"
     },
     rarity: {
         title: "Rarity and upgrades",
@@ -61,6 +68,10 @@ const en = {
         blockFour: "20%: Fundraising;",
         blockFive: "79%: obtained through the rules of the game without direct distribution in any form;",
         blockSix: "1%: as DEX working pool fund",
+    },
+    backer:{
+        title: 'Backer',
+        subTile: 'Doge Adventure is a Game-Fi of X Protocol eco-system'
     },
     rules: {
         title: "Game rules specification",
@@ -201,3 +212,6 @@ const en = {
 }
 
 export default en;
+
+
+// export default cn;

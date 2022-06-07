@@ -7,7 +7,7 @@ const cn = {
         nav3: "道具",
         nav4: "赚取",
         nav5: "代币",
-        nav6: "联系我们",
+        nav8: "联系我们",
         wallet: '我的钱包',
         myInvite: '我的邀请',
         withdraw: '提现',
@@ -20,12 +20,20 @@ const cn = {
         exchange: '兑换护盾',
         consumeDt: '消费DT',
         buySuperShield: '购买超级护盾',
-        coin: '铸造NFT'
+        coin: '铸造NFT',
+        nav6: "白皮书",
+        nav7: "联系我们",
+        tip: "尚未开始，敬请期待",
     },
     about: {
         title: "关于",
         aboutOne: "Doge Adventure是由X Protocol孵化并提供社群支持的原创独立链游，游戏融合了Doge meme元素和NFT随机融合概念。用户通过铸造融合、研究策略、探险、战斗来获取收益并且收集珍贵的NFT收藏品",
         aboutTwo: "Doge Adventure计划用8-12个月升级， 成为兼容第三方NFT接入并提供3D可视化效果的游戏平台"
+    },
+    dogeTime:{
+        price: '价格：',
+        mint: "已mint/总量：",
+        blindBox: "开启盲盒"
     },
     rarity: {
         title: "稀有度和升级",
@@ -61,6 +69,10 @@ const cn = {
         blockFour: "20%: 进行募资;",
         blockFive: "79%: 通过游戏规则获取，不作任何形式的直接发行;",
         blockSix: "1%: 作为DEX流动池资金",
+    },
+    backer:{
+        title: '合作伙伴',
+        subTile: 'Doge Adventure是X Protocol生态内的Game-Fi'
     },
     rules: {
         title: "游戏规则说明书",

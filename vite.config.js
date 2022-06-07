@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import ElementPlus from 'unplugin-element-plus/vite'
 import { resolve } from "path" // 主要用于alias文件路径别名
 // 加别名的函数
 function pathResolve(dir) {
@@ -18,7 +19,10 @@ export default defineConfig({
       }
     }
   },
-  plugins: [vue()],
+  plugins: [vue(),
+    ElementPlus({
+      useSource: true,
+    })],
   define: {
     'process.env': process.env,
   },

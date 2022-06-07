@@ -54,8 +54,8 @@
     justify-content: center;
     align-items: center;
     .block {
-        width: 2.54rem;
-        height: 2.54rem;
+        width: 2.5rem;
+        height: 2.5rem;
         background: url("../assets/prop.png") no-repeat;
         background-size: 2.16rem 2.16rem;
         background-position: center;
@@ -66,8 +66,8 @@
         &:hover {
             background: url("../assets/hover-prop.png") no-repeat;
             background-size: cover;
-            width: 2.54rem;
-            height: 2.54rem;
+            width: 2.5rem;
+            height: 2.5rem;
         }
         .prop-img1{
             width: 1.36rem;
