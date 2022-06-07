@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/js/web3.min.js"></script>
+    <title>DOGE</title>
+    <script>
+      (function setHtmlRem(doc, win, designWidth) {
+        const html = doc.documentElement;
+        const refreshRem = () => {
+          const clientWidth = html.clientWidth;
+          if (clientWidth >= designWidth) {
+            html.style.fontSize = '100px';
+            document.body.style.fontSize = '16px';
+          } else {
+            html.style.fontSize = 100 * (clientWidth / designWidth) + 'px';
+          }
+        }
+        doc.addEventListener('DOMContentLoaded', refreshRem)
+        window.onresize = () => refreshRem();
+      })(document, window, 750);
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

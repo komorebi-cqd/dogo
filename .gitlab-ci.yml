@@ -1,0 +1,46 @@
+default:
+    image: node:16
+
+cache:
+    paths:
+        - node_module/
+
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    tags:
+        - wlblock
+    only:
+        - master
+        - test
+    script:
+        - bash -c "npm i @vue/cli-service && yarn build"
+    artifacts:
+        name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+        paths:
+            - dist/
+        expire_in: 1 week
+
+prod-deploy:
+    stage: deploy
+    tags:
+        - wlblock
+    variables:
+        USER: "root"
+        DIR: "/usr/share/nginx/dogeavt"
+        TAR: "dist"
+        HOST: "18.182.58.81"
+    before_script:
+        - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+        - eval $(ssh-agent -s)
+        - ssh-add <(echo "$PEM_KEY")
+        - mkdir -p ~/.ssh
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    script:
+        - ssh $USER@$HOST "rm -rf ${DIR}/${TAR}"
+        - scp -r $TAR $USER@$HOST:${DIR}
+    only:
+        - master
