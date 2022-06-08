@@ -1,27 +1,17 @@
 <template>
     <div class="mint-bg">
         <div class="mint-doge">
-            <img src="../assets/mint-dog.png" alt="" />
+            <img src="../assets/doge-mint.png" alt="" />
         </div>
-        <div class="mint-date">
-            <div>{{ countdownTime[0] }}</div>
-            <div>{{ countdownTime[1] }}</div>
-            <span>:</span>
-            <div>{{ countdownTime[2] }}</div>
-            <div>{{ countdownTime[3] }}</div>
-            <span>:</span>
-            <div>{{ countdownTime[4] }}</div>
-            <div>{{ countdownTime[5] }}</div>
-        </div>
-        <div class="mint-block">
+        <!-- <div class="mint-block">
             <div class="mint-block-item">
                 <span>{{ $t("dogeTime.price") }}</span>
                 <span class="number">250 DT</span>
             </div>
-            <!-- <div class="mint-block-item">
+            <div class="mint-block-item">
                 <span>{{ $t("dogeTime.mint") }}</span>
                 <span class="number">{{ totalSupply }}/2000</span>
-            </div> -->
+            </div>
             <div
                 class="mint-button"
                 :class="{
@@ -33,17 +23,60 @@
             >
                 {{ isAuth ? "Mint" : "Approve" }}
             </div>
+        </div> -->
+        <div class="mint-block">
+            <div class="mint-block-top">
+                <div class="mint-price">
+                    <span class="number">250 DT</span>
+                    <span>{{ $t("dogeTime.price") }}</span>
+                </div>
+                <div
+                    class="mint-button"
+                    :class="{
+                        loading: mintLoading,
+                        mint: isAuth,
+                        noclick: !isClick,
+                    }"
+                    @click="mintButton"
+                >
+                {{ isAuth ? "Mint" : "Approve" }}
+            </div>
+            </div>
+            <div class="mint-block-bottom">
+                <div class="mint-bottom-title">{{ $t("dogeTime.getDt") }}DT：</div>
+                <ul class="get-dt-rules">
+                    <li>
+                        <span>1</span>
+                        {{ $t("dogeTime.cAddress") }}:
+                        <div class="dt-address">
+                            <strong class="copy-text">0casdaseqwecsdrewSswe23rf32safdwt4hy5465u67edf</strong>
+                            <img src="../assets/copy-icon.png" @click="copy" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <span>2</span>
+                        DEX: <a href="http://pancakeswap.finance/swap" target="_blank">http://pancakeswap.finance/swap</a>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        {{ $t("dogeTime.selectDtExchange") }}
+                    </li>
+                </ul>
+            </div>
         </div>
-        
     </div>
 </template>
 
 <script setup>
-
+import useClipboard from 'vue-clipboard3'
 import { netWorks } from "../config";
 import { computed, ref, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
+import { ElNotification } from 'element-plus'
+import { useI18n } from "vue-i18n";
+const { locale, t } = useI18n();
 const store = useStore();
+const {	toClipboard } = useClipboard();
 
 const account = computed(() => store.state.account);
 const mintLoading = computed(() => store.state.mintLoading);
@@ -58,6 +91,23 @@ const countdownTime = ref("000000");
 const timer = ref("");
 const isClick = ref(false);
 
+
+const copy =async () => {
+    try {
+        await toClipboard('0casdaseqwecsdrewSswe23rf32safdwt4hy5465u67edf')
+        ElNotification({
+            title: "sussess",
+            message: t('copyS'),
+            type: 'success'
+        });
+    } catch (e) {
+        ElNotification({
+            title: "fail",
+            message: t('copyF'),
+            type: 'error'
+        });
+    }
+}
 
 const mintButton = async () => {
     if (!isClick.value) {
@@ -120,115 +170,164 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .mint-bg {
     width: 12rem;
-    height: 4.95rem;
+    height: 4.92rem;
     margin: 0 auto;
     background: url("../assets/blok.png") no-repeat;
     background-size: contain;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.45rem 0 1.1rem;
+    box-sizing: border-box;
 }
 .mint-doge {
-    position: absolute;
-    bottom: 0.48rem;
-    left: 0.97rem;
-    width: 4.34rem;
-    height: 3.11rem;
+    width: 4rem;
+    height: 2.9rem;
+    flex: 0 0 auto;
     img {
         width: 100%;
         height: 100%;
     }
 }
 
-.mint-date {
-    display: flex;
-    font-weight: bold;
-    position: absolute;
-    left: 0.97rem;
-    top: 0.7rem;
-    font-size: 0.23rem;
-    align-items: center;
-    div {
-        color: #fff;
-        width: 0.28rem;
-        height: 0.48rem;
-        font-family: "XMetaverse-Regular";
-        background: url("../assets/time-bg2.png") no-repeat;
-        background-size: contain;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &:nth-of-type(even) {
-            margin-left: 0.1rem;
-        }
-    }
-    span {
-        color: #0c0a00;
-    }
-}
+// .mint-block {
+//     width: 4.5rem;
+//     height: 2.8rem;
+//     background: #ffffff;
+//     border: 0.02rem solid #000000;
+//     border-radius: 0.2rem;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: space-evenly;
+//     .mint-block-item {
+//         width: 100%;
+//         font-size: 0.18rem;
+//         font-weight: 400;
+//         color: #333333;
+//         display: flex;
+//         justify-content: center;
+//         span {
+//             display: inline-block;
+//             width: 30%;
+//         }
+//         .number {
+//             font-weight: bold;
+//         }
+//     }
+//     .loading {
+//         position: relative;
+//         &::after {
+//             content: "";
+//             width: 0.5rem;
+//             height: 0.5rem;
+//             display: inline-block;
+//             position: absolute;
+//             right: 0.1rem;
+//             top: 50%;
+//             transform: translateY(-50%);
+//             background: url("../assets/loading.svg") no-repeat;
+//         }
+//     }
+//     .mint {
+//         &::after {
+//             right: 0.32rem;
+//         }
+//     }
+// }
 
-.mint-block {
-    width: 4.5rem;
-    height: 2.8rem;
-    background: #ffffff;
-    border: 0.02rem solid #000000;
-    border-radius: 0.2rem;
-    position: absolute;
-    bottom: 1rem;
-    right: 1.36rem;
+.mint-block{
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
+    flex: 1 1 auto;
+}
+.mint-block-top{
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-evenly;
-    .mint-block-item {
-        width: 100%;
-        font-size: 0.18rem;
-        font-weight: 400;
-        color: #333333;
-        display: flex;
-        justify-content: center;
-        span {
-            display: inline-block;
-            width: 30%;
+    
+    .mint-price{
+        
+        span{
+            display: block;
+            color: #333333;
+            font-size: 0.16rem;
         }
-        .number {
-            font-weight: bold;
+        .number{
+            font-size: 0.3rem;
+           
         }
     }
-    .loading {
-        position: relative;
-        &::after {
-            content: "";
-            width: 0.5rem;
-            height: 0.5rem;
-            display: inline-block;
-            position: absolute;
-            right: 0.1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: url("../assets/loading.svg") no-repeat;
-        }
-    }
-    .mint {
-        &::after {
-            right: 0.32rem;
+    .mint-button {
+        width: 1.64rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        text-align: center;
+        background: url("../assets/button.png") no-repeat;
+        background-size: cover;
+        font-family: "XMetaverse-Regular";
+        font-weight: bold;
+        color: #000000;
+        cursor: pointer;
+        &.noclick {
+            cursor: not-allowed;
         }
     }
 }
 
-.mint-button {
-    width: 1.64rem;
-    height: 0.5rem;
-    line-height: 0.5rem;
-    text-align: center;
-    background: url("../assets/button.png") no-repeat;
-    background-size: cover;
-    font-family: "XMetaverse-Regular";
-    font-weight: bold;
-    color: #000000;
-    cursor: pointer;
-    &.noclick {
-        cursor: not-allowed;
+.mint-block-bottom{
+    padding: 0.56rem 0 0 0.26rem;
+    box-sizing: border-box;
+    .mint-bottom-title{
+        font-size: 0.18rem;
+        color: #333;
+        font-weight: bold;
+    }
+    
+}
+.get-dt-rules{
+    li{
+        color: #333333;
+        font-size: 0.16rem;
+        margin-top: 0.24rem;
+        span{
+            width: 0.2rem;
+            height: 0.2rem;
+            line-height: 0.2rem;
+            text-align: center;
+            background: #FFD715;
+            border-radius: 50%;
+            font-size: 0.14rem;
+            display: inline-block;
+            margin-right: 0.16rem;
+        }
+        .dt-address{
+            margin-left: 0.4rem;
+            margin-top: 0.16rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            .copy-text{
+                color: #999999;
+                word-break: break-all;
+            }
+            img{
+                width: 0.22rem;
+                height: 0.22rem;
+                display: inline-block;
+                padding-left: 0.05rem;
+                cursor: pointer;
+            }
+        }
+        a{
+            color: #F56408;
+        }
     }
 }
+
+
 .mint-tip {
     display: flex;
     align-items: center;
@@ -246,15 +345,14 @@ onBeforeUnmount(() => {
 @media screen and(max-width:768px) {
     .mint-bg {
         width: 100%;
-        height: 3.2rem;
+        padding: 0 1.45rem 0 0.5rem;
+        background-size: 100% 100%;
     }
     .mint-date {
         left: 0.5rem;
         top: 0.45rem;
     }
     .mint-doge {
-        top: 0.94rem;
-        left: 0.5rem;
         width: 2.5rem;
         height: 1.8rem;
     }
@@ -262,17 +360,20 @@ onBeforeUnmount(() => {
         bottom: 0.6rem;
         right: 0.5rem;
         width: 3.5rem;
-        height: 1.8rem;
         .mint-block-item {
             span {
                 width: 45%;
             }
         }
     }
-    // .mint-tip {
-    //     margin-top: 0.05rem;
-    //     font-size: 0.12rem;
-    // }
+    .mint-block-bottom{
+        padding: 0.1rem 0;
+    }
+    .get-dt-rules{
+        li{
+            margin-top: 0.1rem;
+        }
+    }
     .mint-button {
         width: 2rem;
         height: 0.6rem;

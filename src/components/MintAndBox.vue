@@ -39,7 +39,7 @@ const switchBox = (current) => {
 <style lang="scss" scoped>
 .mint-and-box-container {
     width: 100%;
-    // height: 8rem;
+    height: 8rem;
     background: url("../assets/blind-box-bg.png") no-repeat;
     background-size: cover;
 }

@@ -1,5 +1,7 @@
 const cn = {
-    success: '成功',
+    success: "成功",
+    copyS: "复制成功",
+    copyF:"复制失败",
     head: {
         language: "中文",
         nav1: "首页",
@@ -31,9 +33,12 @@ const cn = {
         aboutTwo: "Doge Adventure计划用8-12个月升级， 成为兼容第三方NFT接入并提供3D可视化效果的游戏平台"
     },
     dogeTime:{
-        price: '价格：',
+        price: '价格',
+        getDt: "如何获得",
+        cAddress: "合约地址",
         mint: "已mint/总量：",
-        blindBox: "开启盲盒"
+        selectDtExchange: "选择USDT与DT进行兑换",
+        blindBox: "开启盲盒",
     },
     rarity: {
         title: "稀有度和升级",

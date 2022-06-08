@@ -121,7 +121,6 @@ export default createStore({
             }
         },
         async isApprove({ state, commit, dispatch }) {
-            console.log(state.errorNet, 'state.errorNet');
             const { account, errorNet } = state;
             if (errorNet) {
                 ElNotification({
@@ -138,12 +137,19 @@ export default createStore({
             const web3 = new window.Web3(window.ethereum);
             const busdContract = new web3.eth.Contract(bep20ABI, busdContractAddress);
             commit('saveState', { key: 'busdContract', value: busdContract })
-            const authorize = await busdContract.methods.allowance(account, mintContractAddress).call();
-            if (authorize < 100 * 10 ** 18) {
-                commit('saveState', { key: 'isAuth', value: false })
-            } else {
-                commit('saveState', { key: 'isAuth', value: true })
+            try {
+                const authorize = await busdContract.methods.allowance(account, mintContractAddress).call();
+                if (authorize < 100 * 10 ** 18) {
+                    commit('saveState', { key: 'isAuth', value: false })
+                } else {
+                    commit('saveState', { key: 'isAuth', value: true })
+                }
+            } catch (error) {
+                console.log(error);
             }
+           
+            
+            
         },
         getApprove({ state, commit }, account) {
             const { busdContract } = state;
@@ -158,6 +164,7 @@ export default createStore({
                 commit('saveState', { key: 'mintLoading', value: false })
                 commit('saveState', { key: 'isAuth', value: true })
             }).catch(err => {
+                console.log(err);
                 commit('saveState', { key: 'mintLoading', value: false })
                 commit('saveState', { key: 'isAuth', value: false })
             });

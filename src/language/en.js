@@ -1,5 +1,7 @@
 const en = {
-  success: 'success',
+    success: 'success',
+    copyS: "copy success",
+    copyF:"copy fail",
     head: {
         language: "English",
         nav1: "Home",
@@ -30,8 +32,11 @@ const en = {
         aboutTwo: "Doge Adventure plans to upgrade in 8-12 months to become a game platform that is compatible with third-party NFT access and provides 3D visualization effects"
     },
     dogeTime:{
-        price: "Price:",
+        price: "Price",
+        getDt: "How to get",
+        cAddress: "contract address",
         mint: "Minted/Total:",
+        selectDtExchange: "Choose USDT to exchange with DT",
         blindBox: "Open Blind Box"
     },
     rarity: {

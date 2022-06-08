@@ -1,24 +1,24 @@
 <template>
     <div class="banner"></div>
     <About />
-    <MintTime />
+    <MintAndBox />
     <DogeType />
     <Earn />
     <DogeProp />
     <Token />
+    <Backer />
     <Footer />
 </template>
 
 <script setup>
-import Head from "../components/Head.vue";
 import About from "../components/About.vue";
 import Footer from "../components/Footer.vue";
-import MintTime from "../components/MintTime.vue";
+import MintAndBox from "../components/MintAndBox.vue";
 import DogeType from "../components/DogeType.vue";
 import Earn from "../components/Earn.vue";
 import DogeProp from "../components/DogeProp.vue";
+import Backer from "../components/Backer.vue";
 import Token from "../components/Token.vue";
-
 
 </script>
 
