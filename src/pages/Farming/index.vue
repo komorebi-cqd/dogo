@@ -8,11 +8,16 @@ import { getCurrentInstance } from "vue";
 import NftCardList from "./NftCardList/index.vue";
 import { queryPayMoney, byInvite, inviteList } from "@/api";
 import { getImg } from "@/utils";
-import store from "@/vuex";
 import { ElButton, ElMessageBox } from "element-plus";
 import qs from "qs";
 import bus from "@/eventBus";
 import i18n from "@/language/i18n";
+import moment from 'moment'
+import { useStore } from "vuex";
+
+
+const store = useStore();
+
 const { wallet } = getCurrentInstance().appContext.config.globalProperties;
 const type = ref("ore");
 const isLogin = ref(false);
@@ -26,14 +31,28 @@ bus.on("changeLanguage", ([lang]) => {
   isEn.value = lang === "en" ? "-en" : "";
 });
 
+const getText = (key) => {
+  return  i18n.global.messages.value[i18n.global.locale.value].farming[key]
+}
 onMounted(async () => {
   onLogin();
 });
 
 const onLogin = async () => {
   try {
+    console.log('login')
     await wallet.init();
     await store.dispatch("getWallet");
+    const list = await inviteList({ address: wallet.accounts[0] });
+    store.commit(
+      "setInviteList",
+      list.map(item => {
+        return {
+          address: item[0],
+          date: moment(item[1] * 1000).format("YYYY-MM-DD HH:mm")
+        };
+      })
+    );
 
     setInterval(() => {
       store.dispatch("getWallet");
@@ -53,14 +72,12 @@ const onLogin = async () => {
 };
 
 const onStart = async () => {
-  console.log(1);
   visible.value = true;
-  console.log(2);
 };
 
 const onInvite = () => {
   ElMessageBox({
-    title: i18n.global.messages[i18n.global.locale].farming.inviteAddress,
+    title: getText('inviteAddress'),
     dangerouslyUseHTMLString: true,
     message: `${location.host}${location.pathname}?invite=${wallet.accounts[0]}`,
     showConfirmButton: false

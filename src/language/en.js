@@ -2,6 +2,13 @@ const en = {
     success: 'success',
     copyS: "copy success",
     copyF:"copy fail",
+    success: 'success',
+    pleaseApproved:'please approve',
+    approvedError: 'approve fail',
+    pleaseInstallWallet: 'please install wallet',
+    approvedSuccess: 'approve success',
+    miningError: 'mining fail',
+    ransomError: 'ransom fail',
     head: {
         language: "English",
         nav1: "Home",

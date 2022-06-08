@@ -7,12 +7,16 @@ import { wallet } from '/src/abi'
 export default createStore({
   // 声明变量
   state: {
-    tokens: null
+    tokens: null,
+    inviteList: []
   },
   mutations: {
     setTokenst(state, value) {
       state.tokens = value
-    }
+    },
+    setInviteList(state, value) {
+      state.inviteList = value
+    },
   },
   actions: {
     async getWallet(context) {

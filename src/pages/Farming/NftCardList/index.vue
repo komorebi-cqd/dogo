@@ -18,15 +18,18 @@ import {
 } from "@/api/index.js";
 import { ElNotification, ElMessageBox } from "element-plus";
 import { getCurrentInstance } from "vue";
-import store from "@/vuex";
+import { useStore } from "vuex";
 import moment from "moment";
 import i18n from "@/language/i18n";
+
+const store = useStore();
 
 const { wallet } = getCurrentInstance().appContext.config.globalProperties;
 
 const getText = (key) => {
-  return i18n.global.messages[i18n.global.locale].farming[key]
+  return  i18n.global.messages.value[i18n.global.locale.value].farming[key]
 }
+
 
 const props = defineProps({
   visible: {
@@ -85,7 +88,6 @@ const handleClose = () => {
 };
 
 onMounted(async () => {
-  console.log(3);
   init();
 });
 
@@ -95,9 +97,9 @@ const init = async () => {
     await wallet.init();
 
     const list = await wallet.getTextNft();
-    cards.value = list.map(tokenId => {
+    cards.value = list.map(row => {
       return {
-        tokenId,
+        ...row,
         status: 0,
         loading: false
       };
@@ -109,12 +111,10 @@ const init = async () => {
     const endDates = await getEndTime({ tokenid: lockList.join(",") });
     const nftStatus = await miningNft({ tokenid: lockList.join(",") });
     if (endDates.length) {
-      console.log(lockList, nftStatus)
       runingCards.value = lockList.map((tokenId, index) => {
         const endDate = moment(endDates[index][1] * 1000).format(
           "YYYY-MM-DD HH:mm"
         );
-        console.log(tokenId)
         return {
           tokenId,
           nftType: nftStatus.find(
@@ -157,16 +157,10 @@ const start = async (row, type) => {
       }
     }
     if (type === "ore") {
-      const { attributeIds } = [
-        {
-          attributeIds: [1, 0, 0, 1, 1, 1, 0, 0]
-        }
-      ][0];
-      let level = attributeIds.slice(1).reduce((total, currentValue) => {
+      let level = row.attributeIds.slice(1).reduce((total, currentValue) => {
         return total + currentValue;
       });
       level = level <= 4 ? 1 : level <= 6 ? 2 : 3;
-
       await wallet.stakePoolStake(
         row.tokenId,
         level === 1 ? "listStake" : "mineStake"
@@ -196,7 +190,6 @@ const start = async (row, type) => {
 };
 
 const unStake = async row => {
-  console.log('--row', row)
   row.loading = true;
   try {
   // 矿山挖矿质押  MineunStake
@@ -243,7 +236,6 @@ const getEarnings = async row => {
 
 const onDiscard = async (row, num) => {
   row.loading = true;
-  console.log(row);
   // const res = await wallet.textNftContrat.methods
   //   .tokenURI(row.tokenId)
   //   .call();
@@ -288,7 +280,7 @@ const onDiscard = async (row, num) => {
             <el-col :key="el.tokenId" v-for="el in cards" :span="8">
               <el-card shadow="hover">
                 <div :class="$style.dog">
-                  <img src="/src/assets/images/farming/dog.png" />
+                  <img :src="el.image_min" />
                   <div :class="$style.info">
                     <p>tokenId: {{el.tokenId}}</p>
                     <div>

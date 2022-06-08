@@ -13,7 +13,7 @@ export default defineConfig({
     port: 3002,
     proxy: {
       '/api': {
-        target: 'http://123.57.240.42:100',   //代理接口
+        target: 'http://3.112.243.158:100',   //代理接口
         changeOrigin: true,
 
       }

@@ -2,6 +2,12 @@ const cn = {
     success: "成功",
     copyS: "复制成功",
     copyF:"复制失败",
+    pleaseApproved:'请授权',
+    approvedError: '授权失败',
+    pleaseInstallWallet: '您还未安装钱包',
+    approvedSuccess: '授权成功',
+    miningError: '挖矿失败',
+    ransomError: '赎回失败',
     head: {
         language: "中文",
         nav1: "首页",
