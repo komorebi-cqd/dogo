@@ -43,23 +43,29 @@
             </div>
             </div>
             <div class="mint-block-bottom">
-                <div class="mint-bottom-title">{{ $t("dogeTime.getDt") }}DT：</div>
+                <div class="mint-bottom-title">{{ $t("dogeTime.getDt") }} DT：</div>
                 <ul class="get-dt-rules">
                     <li>
                         <span>1</span>
-                        {{ $t("dogeTime.cAddress") }}:
-                        <div class="dt-address">
-                            <strong class="copy-text">0casdaseqwecsdrewSswe23rf32safdwt4hy5465u67edf</strong>
-                            <img src="../assets/copy-icon.png" @click="copy" alt="">
+                        <div class="doge-right">
+                            {{ $t("dogeTime.cAddress") }}:
+                            <div class="dt-address">
+                                <strong class="copy-text">0casdaseqwecsdrewSswe23rf32safdwt4hy5465u67edf</strong>
+                                <img src="../assets/copy-icon.png" @click="copy" alt="">
+                            </div>
                         </div>
                     </li>
                     <li>
                         <span>2</span>
-                        DEX: <a href="http://pancakeswap.finance/swap" target="_blank">http://pancakeswap.finance/swap</a>
+                        <div class="doge-right">
+                            DEX: <a href="http://pancakeswap.finance/swap" target="_blank">http://pancakeswap.finance/swap</a>
+                        </div>
                     </li>
                     <li>
                         <span>3</span>
-                        {{ $t("dogeTime.selectDtExchange") }}
+                        <div class="doge-right">
+                            {{ $t("dogeTime.selectDtExchange") }}
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -257,7 +263,9 @@ onBeforeUnmount(() => {
         }
         .number{
             font-size: 0.3rem;
-           
+           font-family: 'XMetaverse-Bold';
+           font-weight: bold;
+           padding-bottom: 0.1rem;
         }
     }
     .mint-button {
@@ -278,8 +286,11 @@ onBeforeUnmount(() => {
 }
 
 .mint-block-bottom{
-    padding: 0.56rem 0 0 0.26rem;
+    margin-top: 0.4rem;
+    padding: 0.16rem 0 0.2rem 0.26rem;
+    border-radius: 0.08rem;
     box-sizing: border-box;
+    background-color: #F9F8F6;
     .mint-bottom-title{
         font-size: 0.18rem;
         color: #333;
@@ -291,8 +302,27 @@ onBeforeUnmount(() => {
     li{
         color: #333333;
         font-size: 0.16rem;
-        margin-top: 0.24rem;
+        padding-top: 0.24rem;
+        display: flex;
+        position: relative;
+        &:first-child{
+            padding-top: 0;
+            margin-top: 0.24rem;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            display: block;
+            left: 0.1rem;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            z-index: 2;
+            background-color: #CCCCCC;
+        }
         span{
+            flex: 0 0 auto;
+            z-index: 9;
             width: 0.2rem;
             height: 0.2rem;
             line-height: 0.2rem;
@@ -304,7 +334,6 @@ onBeforeUnmount(() => {
             margin-right: 0.16rem;
         }
         .dt-address{
-            margin-left: 0.4rem;
             margin-top: 0.16rem;
             position: relative;
             display: flex;
@@ -359,7 +388,7 @@ onBeforeUnmount(() => {
     .mint-block {
         bottom: 0.6rem;
         right: 0.5rem;
-        width: 3.5rem;
+        width: 4rem;
         .mint-block-item {
             span {
                 width: 45%;
@@ -367,11 +396,18 @@ onBeforeUnmount(() => {
         }
     }
     .mint-block-bottom{
-        padding: 0.1rem 0;
+        width: auto;
+        padding: 0 0.2rem;
+        margin-top: 0.01rem;
     }
     .get-dt-rules{
         li{
-            margin-top: 0.1rem;
+            padding-top: 0.1rem;
+            &:last-child{
+                &::before{
+                    background-color: transparent;
+                }
+            }
         }
     }
     .mint-button {
