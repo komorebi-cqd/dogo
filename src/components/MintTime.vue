@@ -341,6 +341,7 @@ onBeforeUnmount(() => {
             .copy-text{
                 color: #999999;
                 word-break: break-all;
+                font-weight:normal
             }
             img{
                 width: 0.22rem;
